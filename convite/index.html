@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Uma pergunta ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at 20% 20%, #ffb6c9, transparent 30%),
+        radial-gradient(circle at 80% 80%, #ff4f81, transparent 30%),
+        linear-gradient(135deg, #ff416c, #ff4b8b);
+
+    color: white;
+}
+
+/* CORAÇÕES */
+
+.coracao {
+    position: fixed;
+    bottom: -30px;
+    font-size: 22px;
+    animation: subir 6s linear infinite;
+    opacity: .7;
+    pointer-events: none;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* CARTÃO */
+
+.card {
+    position: relative;
+    width: 90%;
+    max-width: 430px;
+    padding: 40px 25px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,.18);
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 30px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.25);
+
+    animation: aparecer 1s ease;
+}
+
+@keyframes aparecer {
+    from {
+        transform: scale(.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.emoji {
+    font-size: 65px;
+    animation: pulsar 1.5s infinite;
+}
+
+@keyframes pulsar {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 30px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* BOTÕES */
+
+.botoes {
+    position: relative;
+    height: 150px;
+    margin-top: 25px;
+}
+
+button {
+    border: none;
+    padding: 15px 30px;
+
+    border-radius: 50px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+
+#sim {
+    background: white;
+    color: #ff416c;
+
+    transition: .2s;
+}
+
+#sim:hover {
+    transform: scale(1.1);
+}
+
+#nao {
+    position: absolute;
+
+    background: rgba(0,0,0,.35);
+    color: white;
+
+    left: 55%;
+    top: 70px;
+
+    transition: .15s;
+}
+
+/* TELA FINAL */
+
+#resultado {
+    display: none;
+}
+
+#resultado h1 {
+    font-size: 38px;
+}
+
+.coracaoGrande {
+    font-size: 80px;
+
+    animation:
+        pulsar 1s infinite,
+        girar 3s linear infinite;
+}
+
+@keyframes girar {
+    0% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+.assinatura {
+    margin-top: 25px;
+    font-size: 15px;
+    opacity: .8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- CORAÇÕES -->
+
+<div class="coracao" style="left:10%; animation-delay:0s;">❤️</div>
+<div class="coracao" style="left:25%; animation-delay:2s;">💕</div>
+<div class="coracao" style="left:45%; animation-delay:1s;">💗</div>
+<div class="coracao" style="left:65%; animation-delay:3s;">❤️</div>
+<div class="coracao" style="left:85%; animation-delay:1.5s;">💖</div>
+
+<!-- CARTÃO -->
+
+<div class="card">
+
+    <!-- PERGUNTA -->
+
+    <div id="pergunta">
+
+        <div class="emoji">
+            💌
+        </div>
+
+        <h1>Tenho uma pergunta...</h1>
+
+        <p>
+            Você toparia sair comigo? 👀❤️
+        </p>
+
+        <p>
+            Prometo que pode ser divertido 😌
+        </p>
+
+        <div class="botoes">
+
+            <button id="sim" onclick="aceitou()">
+                SIM ❤️
+            </button>
+
+            <button id="nao">
+                NÃO 😭
+            </button>
+
+        </div>
+
+        <div class="assinatura">
+            Feito especialmente para você ❤️
+        </div>
+
+    </div>
+
+    <!-- FINAL -->
+
+    <div id="resultado">
+
+        <div class="coracaoGrande">
+            ❤️
+        </div>
+
+        <h1>EU SABIA! 😭❤️</h1>
+
+        <p>
+            Então agora não tem mais volta... 👀
+        </p>
+
+        <p>
+            Só falta a gente combinar o dia e o lugar. 😎
+        </p>
+
+        <div class="assinatura">
+            Talvez esse seja o começo de uma história muito boa...
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const nao = document.getElementById("nao");
+
+function fugir() {
+
+    const margem = 15;
+
+    const largura =
+        window.innerWidth - nao.offsetWidth - margem;
+
+    const altura =
+        window.innerHeight - nao.offsetHeight - margem;
+
+    const x =
+        Math.random() * largura;
+
+    const y =
+        Math.random() * altura;
+
+    nao.style.position = "fixed";
+
+    nao.style.left = x + "px";
+
+    nao.style.top = y + "px";
+}
+
+/* COMPUTADOR */
+
+nao.addEventListener("mouseenter", fugir);
+
+/* CELULAR */
+
+nao.addEventListener("touchstart", function(event) {
+
+    event.preventDefault();
+
+    fugir();
+
+});
+
+/* SIM */
+
+function aceitou() {
+
+    document.getElementById("pergunta").style.display = "none";
+
+    document.getElementById("resultado").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

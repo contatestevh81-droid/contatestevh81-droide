@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Uma pergunta 💌</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+.card {
+    width: 90%;
+    max-width: 400px;
+    padding: 35px 20px;
+    text-align: center;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+
+h1 {
+    color: #ff4f70;
+}
+
+p {
+    color: #555;
+    font-size: 18px;
+}
+
+.botoes {
+    margin-top: 30px;
+    height: 120px;
+    position: relative;
+}
+
+button {
+    border: none;
+    padding: 14px 25px;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#sim {
+    background: #ff4f70;
+    color: white;
+}
+
+#nao {
+    background: #555;
+    color: white;
+    position: absolute;
+    left: 55%;
+    top: 50px;
+    transition: .15s;
+}
+
+#resultado {
+    display: none;
+    font-size: 20px;
+    color: #ff4f70;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div id="pergunta">
+
+        <h1>Tenho uma pergunta... 💌</h1>
+
+        <p>
+            Você quer sair comigo? 👀❤️
+        </p>
+
+        <div class="botoes">
+
+            <button id="sim" onclick="aceitou()">
+                SIM ❤️
+            </button>
+
+            <button id="nao">
+                NÃO 😭
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="resultado">
+        <h1>AAAAA 😭❤️</h1>
+        <p>
+            Então está marcado! 👀
+        </p>
+        <p>
+            Agora falta escolher o lugar 😎
+        </p>
+    </div>
+
+</div>
+
+<script>
+
+const nao = document.getElementById("nao");
+
+function fugir() {
+
+    const largura =
+        window.innerWidth - nao.offsetWidth - 20;
+
+    const altura =
+        window.innerHeight - nao.offsetHeight - 20;
+
+    const x = Math.random() * largura;
+    const y = Math.random() * altura;
+
+    nao.style.position = "fixed";
+    nao.style.left = x + "px";
+    nao.style.top = y + "px";
+}
+
+nao.addEventListener("mouseenter", fugir);
+
+nao.addEventListener("touchstart", function(event) {
+    event.preventDefault();
+    fugir();
+});
+
+function aceitou() {
+
+    document.getElementById("pergunta").style.display = "none";
+
+    document.getElementById("resultado").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
