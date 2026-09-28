@@ -25,7 +25,7 @@ body {
 .card {
     width: 90%;
     max-width: 400px;
-    padding: 35px 20px;
+    padding: 30px 20px;
     text-align: center;
     background: white;
     border-radius: 25px;
@@ -34,6 +34,7 @@ body {
 
 h1 {
     color: #ff4f70;
+    margin-bottom: 10px;
 }
 
 p {
@@ -41,8 +42,66 @@ p {
     font-size: 18px;
 }
 
+/* URSINHOS */
+.ursos {
+    font-size: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.urso {
+    display: inline-block;
+    animation: respirar 2s infinite ease-in-out;
+}
+
+@keyframes respirar {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+/* DANÇA */
+.dancando {
+    animation: danca .35s infinite alternate ease-in-out;
+}
+
+@keyframes danca {
+    from {
+        transform: rotate(-15deg) translateY(0);
+    }
+
+    to {
+        transform: rotate(15deg) translateY(-12px);
+    }
+}
+
+/* URSO BRAVO */
+#bravo {
+    display: none;
+    font-size: 45px;
+    margin-top: 5px;
+    animation: bravo .25s infinite alternate;
+}
+
+@keyframes bravo {
+    from {
+        transform: rotate(-8deg);
+    }
+
+    to {
+        transform: rotate(8deg);
+    }
+}
+
+/* BOTÕES */
 .botoes {
-    margin-top: 30px;
+    margin-top: 25px;
     height: 120px;
     position: relative;
 }
@@ -59,6 +118,9 @@ button {
 #sim {
     background: #ff4f70;
     color: white;
+    position: absolute;
+    left: 15%;
+    top: 45px;
 }
 
 #nao {
@@ -66,14 +128,32 @@ button {
     color: white;
     position: absolute;
     left: 55%;
-    top: 50px;
+    top: 45px;
     transition: .15s;
 }
 
 #resultado {
     display: none;
-    font-size: 20px;
     color: #ff4f70;
+}
+
+#resultado h1 {
+    font-size: 30px;
+}
+
+.coracoes {
+    font-size: 30px;
+    animation: coracao 1s infinite alternate;
+}
+
+@keyframes coracao {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
 }
 </style>
 </head>
@@ -82,7 +162,17 @@ button {
 
 <div class="card">
 
+    <!-- PERGUNTA -->
     <div id="pergunta">
+
+        <div class="ursos" id="ursos">
+            <span class="urso" id="urso1">🐻</span>
+            <span class="urso" id="urso2">🐻</span>
+        </div>
+
+        <div id="bravo">
+            😡🐻
+        </div>
 
         <h1>Tenho uma pergunta... 💌</h1>
 
@@ -96,7 +186,7 @@ button {
                 SIM ❤️
             </button>
 
-            <button id="nao">
+            <button id="nao" onclick="naoAceitou()">
                 NÃO 😭
             </button>
 
@@ -104,14 +194,28 @@ button {
 
     </div>
 
+    <!-- RESULTADO -->
     <div id="resultado">
+
+        <div class="ursos">
+            <span class="urso dancando">🐻</span>
+            <span class="urso dancando">🐻</span>
+        </div>
+
         <h1>AAAAA 😭❤️</h1>
+
         <p>
             Então está marcado! 👀
         </p>
+
         <p>
             Agora falta escolher o lugar 😎
         </p>
+
+        <div class="coracoes">
+            ❤️ 💕 ❤️
+        </div>
+
     </div>
 
 </div>
@@ -119,36 +223,37 @@ button {
 <script>
 
 const nao = document.getElementById("nao");
+const bravo = document.getElementById("bravo");
 
-function fugir() {
+function naoAceitou() {
 
-    const largura =
-        window.innerWidth - nao.offsetWidth - 20;
+    // mostra o ursinho bravo
+    bravo.style.display = "block";
 
-    const altura =
-        window.innerHeight - nao.offsetHeight - 20;
+    // muda o texto do botão
+    nao.innerHTML = "NÃO 😭";
 
-    const x = Math.random() * largura;
-    const y = Math.random() * altura;
+    // faz o botão fugir
+    const card = document.querySelector(".card");
+    const botoes = document.querySelector(".botoes");
 
-    nao.style.position = "fixed";
+    const maxX = botoes.clientWidth - nao.offsetWidth;
+    const maxY = botoes.clientHeight - nao.offsetHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
     nao.style.left = x + "px";
     nao.style.top = y + "px";
 }
 
-nao.addEventListener("mouseenter", fugir);
-
-nao.addEventListener("touchstart", function(event) {
-    event.preventDefault();
-    fugir();
-});
-
 function aceitou() {
 
+    // esconde a pergunta
     document.getElementById("pergunta").style.display = "none";
 
+    // mostra resultado
     document.getElementById("resultado").style.display = "block";
-
 }
 
 </script>
