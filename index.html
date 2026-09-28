@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Uma pergunta 💌</title>
+<title>Um convite especial 💌</title>
 
 <style>
 * {
@@ -13,147 +13,218 @@
 
 body {
     margin: 0;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow: hidden;
 }
 
 .card {
     width: 90%;
-    max-width: 400px;
-    padding: 30px 20px;
-    text-align: center;
+    max-width: 420px;
+    min-height: 500px;
     background: white;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    border-radius: 30px;
+    padding: 30px 22px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.tela {
+    display: none;
+    animation: entrar .5s ease;
+}
+
+.tela.ativa {
+    display: block;
+}
+
+@keyframes entrar {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 h1 {
     color: #ff4f70;
-    margin-bottom: 10px;
+    font-size: 27px;
 }
 
 p {
     color: #555;
     font-size: 18px;
+    line-height: 1.5;
 }
 
-/* URSINHOS */
-.ursos {
-    font-size: 60px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+.emoji-grande {
+    font-size: 75px;
+    margin: 15px 0;
+    animation: flutuar 2s infinite ease-in-out;
 }
 
-.urso {
-    display: inline-block;
-    animation: respirar 2s infinite ease-in-out;
-}
-
-@keyframes respirar {
-    0%, 100% {
-        transform: scale(1);
+@keyframes flutuar {
+    0%,100% {
+        transform: translateY(0);
     }
 
     50% {
-        transform: scale(1.08);
-    }
-}
-
-/* DANÇA */
-.dancando {
-    animation: danca .35s infinite alternate ease-in-out;
-}
-
-@keyframes danca {
-    from {
-        transform: rotate(-15deg) translateY(0);
-    }
-
-    to {
-        transform: rotate(15deg) translateY(-12px);
-    }
-}
-
-/* URSO BRAVO */
-#bravo {
-    display: none;
-    font-size: 45px;
-    margin-top: 5px;
-    animation: bravo .25s infinite alternate;
-}
-
-@keyframes bravo {
-    from {
-        transform: rotate(-8deg);
-    }
-
-    to {
-        transform: rotate(8deg);
+        transform: translateY(-10px);
     }
 }
 
 /* BOTÕES */
+
 .botoes {
-    margin-top: 25px;
-    height: 120px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
 }
 
 button {
     border: none;
-    padding: 14px 25px;
     border-radius: 30px;
-    font-size: 17px;
+    padding: 16px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    transition: .2s;
 }
 
-#sim {
+button:active {
+    transform: scale(.94);
+}
+
+.sim {
     background: #ff4f70;
     color: white;
-    position: absolute;
-    left: 15%;
-    top: 45px;
 }
 
-#nao {
-    background: #555;
+.certeza {
+    background: #ff9eb1;
     color: white;
-    position: absolute;
-    left: 55%;
-    top: 45px;
-    transition: .15s;
 }
 
-#resultado {
+/* COMIDAS */
+
+.comidas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.comida {
+    background: #fff0f3;
+    color: #444;
+    border: 2px solid #ffd0d9;
+    padding: 18px 8px;
+    border-radius: 20px;
+    font-size: 17px;
+}
+
+.comida:hover {
+    background: #ff4f70;
+    color: white;
+}
+
+/* HORÁRIOS */
+
+.horarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.horario {
+    background: #fff0f3;
+    color: #444;
+    border: 2px solid #ffd0d9;
+}
+
+.horario:hover {
+    background: #ff4f70;
+    color: white;
+}
+
+/* FINAL */
+
+.urso-final {
+    font-size: 110px;
+    margin-top: 25px;
+    cursor: pointer;
+    display: inline-block;
+    animation: urso 1.5s infinite ease-in-out;
+}
+
+@keyframes urso {
+    0%,100% {
+        transform: rotate(-5deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(5deg) scale(1.08);
+    }
+}
+
+.msg-final {
     display: none;
+    background: #fff0f3;
     color: #ff4f70;
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 19px;
+    font-weight: bold;
+    animation: aparecer .5s ease;
 }
 
-#resultado h1 {
-    font-size: 30px;
-}
-
-.coracoes {
-    font-size: 30px;
-    animation: coracao 1s infinite alternate;
-}
-
-@keyframes coracao {
+@keyframes aparecer {
     from {
-        transform: scale(1);
+        opacity: 0;
+        transform: scale(.7);
     }
 
     to {
-        transform: scale(1.2);
+        opacity: 1;
+        transform: scale(1);
     }
+}
+
+.coracoes {
+    position: absolute;
+    pointer-events: none;
+    animation: subir 3s linear forwards;
+}
+
+@keyframes subir {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-500px);
+        opacity: 0;
+    }
+}
+
+.escolhido {
+    margin-top: 20px;
+    color: #ff4f70;
+    font-weight: bold;
 }
 </style>
 </head>
@@ -162,98 +233,238 @@ button {
 
 <div class="card">
 
-    <!-- PERGUNTA -->
-    <div id="pergunta">
+    <!-- TELA 1 -->
+    <div class="tela ativa" id="tela1">
 
-        <div class="ursos" id="ursos">
-            <span class="urso" id="urso1">🐻</span>
-            <span class="urso" id="urso2">🐻</span>
-        </div>
+        <div class="emoji-grande">🐻❤️🐻</div>
 
-        <div id="bravo">
-            😡🐻
-        </div>
-
-        <h1>Tenho uma pergunta... 💌</h1>
+        <h1>Tenho uma pergunta... 👀</h1>
 
         <p>
-            Você quer sair comigo? 👀❤️
+            Você gostaria de merendar comigo? 😋❤️
         </p>
 
         <div class="botoes">
 
-            <button id="sim" onclick="aceitou()">
+            <button class="sim" onclick="proximaTela(2)">
                 SIM ❤️
             </button>
 
-            <button id="nao" onclick="naoAceitou()">
-                NÃO 😭
+            <button class="certeza" onclick="proximaTela(2)">
+                COM CERTEZA 😍
             </button>
 
         </div>
 
     </div>
 
-    <!-- RESULTADO -->
-    <div id="resultado">
 
-        <div class="ursos">
-            <span class="urso dancando">🐻</span>
-            <span class="urso dancando">🐻</span>
+    <!-- TELA 2 -->
+    <div class="tela" id="tela2">
+
+        <div class="emoji-grande">🍽️😋</div>
+
+        <h1>O que você gostaria de comer?</h1>
+
+        <p>
+            Escolha uma opção 👇
+        </p>
+
+        <div class="comidas">
+
+            <button class="comida" onclick="escolherComida('X-tudo')">
+                🍔<br>
+                X-tudo
+            </button>
+
+            <button class="comida" onclick="escolherComida('Pizza')">
+                🍕<br>
+                Pizza
+            </button>
+
+            <button class="comida" onclick="escolherComida('Hambúrguer')">
+                🍔<br>
+                Hambúrguer
+            </button>
+
+            <button class="comida" onclick="escolherComida('Frango grelhado')">
+                🍗<br>
+                Frango grelhado
+            </button>
+
         </div>
 
-        <h1>AAAAA 😭❤️</h1>
+        <div class="escolhido" id="comidaEscolhida"></div>
+
+    </div>
+
+
+    <!-- TELA 3 -->
+    <div class="tela" id="tela3">
+
+        <div class="emoji-grande">⏰❤️</div>
+
+        <h1>Qual horário você está disponível?</h1>
 
         <p>
-            Então está marcado! 👀
+            Escolha o melhor horário para nossa merenda 😋
         </p>
+
+        <div class="horarios">
+
+            <button class="horario" onclick="escolherHorario('16:00')">
+                16:00
+            </button>
+
+            <button class="horario" onclick="escolherHorario('17:00')">
+                17:00
+            </button>
+
+            <button class="horario" onclick="escolherHorario('18:00')">
+                18:00
+            </button>
+
+            <button class="horario" onclick="escolherHorario('19:00')">
+                19:00
+            </button>
+
+        </div>
+
+        <div class="escolhido" id="horarioEscolhido"></div>
+
+    </div>
+
+
+    <!-- TELA 4 -->
+    <div class="tela" id="tela4">
+
+        <div class="emoji-grande">🥳❤️</div>
+
+        <h1>Combinado! 😍</h1>
+
+        <p id="resumo"></p>
 
         <p>
-            Agora falta escolher o lugar 😎
+            Agora falta só uma coisa...
         </p>
 
-        <div class="coracoes">
-            ❤️ 💕 ❤️
+        <div
+            class="urso-final"
+            onclick="tocarUrso()">
+            🐻
+        </div>
+
+        <p>
+            👆 Toque no ursinho
+        </p>
+
+        <div
+            class="msg-final"
+            id="msgFinal">
+            Você tem um bom gosto! 😎❤️
         </div>
 
     </div>
 
 </div>
 
+
 <script>
 
-const nao = document.getElementById("nao");
-const bravo = document.getElementById("bravo");
+let comidaEscolhida = "";
+let horarioEscolhido = "";
 
-function naoAceitou() {
 
-    // mostra o ursinho bravo
-    bravo.style.display = "block";
+/* TROCAR DE TELA */
 
-    // muda o texto do botão
-    nao.innerHTML = "NÃO 😭";
+function proximaTela(numero) {
 
-    // faz o botão fugir
-    const card = document.querySelector(".card");
-    const botoes = document.querySelector(".botoes");
+    document.querySelectorAll(".tela").forEach(function(tela) {
+        tela.classList.remove("ativa");
+    });
 
-    const maxX = botoes.clientWidth - nao.offsetWidth;
-    const maxY = botoes.clientHeight - nao.offsetHeight;
+    document.getElementById("tela" + numero).classList.add("ativa");
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    nao.style.left = x + "px";
-    nao.style.top = y + "px";
+    criarCoracoes();
 }
 
-function aceitou() {
 
-    // esconde a pergunta
-    document.getElementById("pergunta").style.display = "none";
+/* ESCOLHER COMIDA */
 
-    // mostra resultado
-    document.getElementById("resultado").style.display = "block";
+function escolherComida(comida) {
+
+    comidaEscolhida = comida;
+
+    document.getElementById("comidaEscolhida").innerHTML =
+        "Você escolheu: " + comida + " 😋❤️";
+
+    setTimeout(function() {
+        proximaTela(3);
+    }, 800);
+}
+
+
+/* ESCOLHER HORÁRIO */
+
+function escolherHorario(horario) {
+
+    horarioEscolhido = horario;
+
+    document.getElementById("horarioEscolhido").innerHTML =
+        "Horário escolhido: " + horario + " ⏰❤️";
+
+    setTimeout(function() {
+
+        document.getElementById("resumo").innerHTML =
+            "Então ficou combinado: " +
+            "<br><br>" +
+            "🍽️ " + comidaEscolhida +
+            "<br>" +
+            "⏰ " + horarioEscolhido;
+
+        proximaTela(4);
+
+    }, 900);
+}
+
+
+/* TOCAR NO URSINHO */
+
+function tocarUrso() {
+
+    document.getElementById("msgFinal").style.display = "block";
+
+    criarCoracoes();
+
+}
+
+
+/* CORAÇÕES */
+
+function criarCoracoes() {
+
+    for(let i = 0; i < 8; i++) {
+
+        const coracao = document.createElement("div");
+
+        coracao.className = "coracoes";
+
+        coracao.innerHTML = "❤️";
+
+        coracao.style.left =
+            Math.random() * 100 + "%";
+
+        coracao.style.bottom = "0px";
+
+        coracao.style.fontSize =
+            (15 + Math.random() * 20) + "px";
+
+        document.body.appendChild(coracao);
+
+        setTimeout(function() {
+            coracao.remove();
+        }, 3000);
+    }
 }
 
 </script>
